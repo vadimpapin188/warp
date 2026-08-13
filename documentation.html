@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warp — Легковесный аналог Electron</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Шапка */
+        header {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #38bdf8;
+        }
+
+        /* Главный блок (Hero) */
+        .hero {
+            max-width: 800px;
+            text-align: center;
+            margin: 40px 0 30px;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 16px;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Карточки с документацией */
+        .doc-section {
+            max-width: 900px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .doc-section h2 {
+            font-size: 24px;
+            color: #38bdf8;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
+        }
+
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            font-family: monospace;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        /* Пример кода */
+        .code-example {
+            background-color: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: monospace;
+            color: #e2e8f0;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        .code-title {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Подвал */
+        footer {
+            margin-top: auto;
+            padding: 30px 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">⚡ WARP</div>
+        <a href="#" class="nav-link">Документация</a>
+    </header>
+
+    <div class="hero">
+        <h1>Работа с окном и системным треем</h1>
+        <p class="subtitle">
+            В этом разделе описаны функции Warp API для управления окном приложения и иконками в трее.
+        </p>
+    </div>
+
+    <!-- Подключение API -->
+    <section class="doc-section">
+        <h2>1. Подключение Warp API</h2>
+        <p class="subtitle">
+            Перед использованием функций подключите файл <code>warp_api.js</code> в вашем HTML-файле перед основным скриптом:
+        </p>
+        <div class="code-example">
+            <div class="code-title">HTML</div>
+            <pre><code>&lt;script src="warp_api.js"&gt;&lt;/script&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+    </section>
+
+    <!-- Функции API -->
+    <section class="doc-section">
+        <h2>2. Функции API</h2>
+
+        <!-- set_window_name -->
+        <div class="card">
+            <h3>set_window_name(name)</h3>
+            <p>Устанавливает заголовок (название) окна приложения.</p>
+            <div class="code-example">
+                <div class="code-title">Пример использования</div>
+                <pre><code>await set_window_name("Мое приложение");</code></pre>
+            </div>
+        </div>
+
+        <!-- set_size -->
+        <div class="card">
+            <h3>set_size(w, h)</h3>
+            <p>Задает ширину (<code>w</code>) и высоту (<code>h</code>) окна в пикселях.</p>
+            <div class="code-example">
+                <div class="code-title">Пример использования</div>
+                <pre><code>// Установит размер окна 800 на 600 пикселей
+await set_size(800, 600);</code></pre>
+            </div>
+        </div>
+
+        <!-- create_stray_icon -->
+        <div class="card">
+            <h3>create_stray_icon(name, des, icon_path)</h3>
+            <p>Создает иконку приложения в системном трее (возле часов).</p>
+            <p><strong>Параметры:</strong></p>
+            <ul style="color: #94a3b8; margin-left: 20px; margin-bottom: 12px; font-size: 14px;">
+                <li><code>name</code> — название приложения в трее</li>
+                <li><code>des</code> — всплывающее описание при наведении</li>
+                <li><code>icon_path</code> — путь к файлу иконки (.ico или .png)</li>
+            </ul>
+            <div class="code-example">
+                <div class="code-title">Пример использования</div>
+                <pre><code>await create_stray_icon("Warp App", "Мое приложение работает в фоне", "icon.png");</code></pre>
+            </div>
+        </div>
+
+        <!-- create_stray_menu -->
+        <div class="card">
+            <h3>create_stray_menu(name_item)</h3>
+            <p>Добавляет пункт меню для иконки в системном трее.</p>
+            <div class="code-example">
+                <div class="code-title">Пример использования</div>
+                <pre><code>await create_stray_menu("Выход");</code></pre>
+            </div>
+        </div>
+
+        <!-- developer_mode -->
+        <div class="card">
+            <h3>developer_mode()</h3>
+            <p>Включает режим разработчика и открывает инструменты отладки (DevTools / Консоль).</p>
+            <div class="code-example">
+                <div class="code-title">Пример использования</div>
+                <pre><code>await developer_mode();</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© Warp Framework. Сделано с помощью Python & JS.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warp — Легковесный аналог Electron</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Шапка */
+        header {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #38bdf8;
+        }
+
+        /* Главный блок (Hero) */
+        .hero {
+            max-width: 800px;
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Кнопки */
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #0369a1;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #334155;
+        }
+
+        /* Карточки с преимуществами */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Пример кода */
+        .code-example {
+            max-width: 900px;
+            width: 100%;
+            margin-top: 40px;
+            background-color: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            font-family: monospace;
+            color: #e2e8f0;
+        }
+
+        .code-title {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Подвал */
+        footer {
+            margin-top: auto;
+            padding: 30px 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">⚡ WARP</div>
+        <a href="documentation.html" class="nav-link">Документация</a>
+    </header>
+
+    <section class="hero">
+        <h1>Превращай HTML, CSS и JS в быстрые Windows-приложения</h1>
+        <p class="subtitle">Warp — это суперлёгкий рантайм. Без сборщиков, без сложного Node.js и без гигабайтов лишнего кода. Просто запусти `.exe` рядом с сайтом.</p>
+        
+        <div class="buttons">
+            <button class="btn-primary" onclick="download()">Скачать warp.exe</button>
+            <button class="btn-primary" onclick="download_zip()">Скачать ZIP с WarpAPI и exe</button>
+            <a href="documentation.html" class="btn-secondary">Документация</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="card">
+            <h3>🚀 Никакой сборки</h3>
+            <p>Не нужно компилировать проект. Просто переименуй `core.exe` и положи в папку со своими HTML-файлами.</p>
+        </div>
+        <div class="card">
+            <h3>🔔 Системный трей</h3>
+            <p>Встроенная поддержка создания иконки и меню в трее Windows прямо из вашего JavaScript.</p>
+        </div>
+        <div class="card">
+            <h3>⚡ Быстрый JS API</h3>
+            <p>Управляй заголовком, размером окна и его состоянием на лету с помощью понятного `api.js`.</p>
+        </div>
+    </section>
+
+    <section class="code-example">
+        <div class="code-title">Пример использования api.js</div>
+        <pre><code>await set_window_name("My app");</code></pre>
+    </section>
+
+    <footer>
+        <p>© Warp Framework. Сделано с помощью Python & JS.</p>
+    </footer>
+
+    <script>
+        function download() {
+            window.location.href = "warp.exe";
+        };
+        function download_zip() {
+        	window.location.href = "warp_1.0.zip";
+        }
+    </script>
+</body>
+</html>
